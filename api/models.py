@@ -16,6 +16,6 @@ class Location(MPTTModel):
 
     class Admin:
         list_display = ('parent', 'text')
-        # list_filter = ('category',)
+        list_filter = ('level',)
         search_fields = ('text__icontains', 'parent__text__icontains')
         ordering = ['-text']
