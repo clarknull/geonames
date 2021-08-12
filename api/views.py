@@ -9,10 +9,11 @@ class GetChildren(ListAPIView):
     serializer_class = serializers.Location
     model = models.Location
     renderer_classes = [JSONRenderer]
+    level = 2
 
     def get_queryset(self):
         try:
-            return self.model.objects.get(code=self.kwargs.get('code')).get_children()
+            return self.model.objects.get(code__icontains=self.kwargs.get('code'),level=self.level).get_children()
         except self.model.DoesNotExist:
             raise NotFound(detail="Unsupported Code")
 
